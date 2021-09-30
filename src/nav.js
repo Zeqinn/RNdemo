@@ -12,8 +12,8 @@ function Nav() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Index">
-        <Stack.Screen name="Index" component={Index} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Index" component={Index} />
       </Stack.Navigator>
     </NavigationContainer>
   );

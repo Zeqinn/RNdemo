@@ -9,3 +9,7 @@ const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 export const pxToDp = (elePx) => screenWidth * elePx / 375;
+
+
+
+export default Util;
