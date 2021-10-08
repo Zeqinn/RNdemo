@@ -76,7 +76,7 @@ class Login extends Component {
       Toast.info('请输入验证码', 1, undefined, false)
       return;
     }
-    this.props.navigation.navigate('Home');
+    this.props.navigation.navigate('Index');
   }
 
   render() {

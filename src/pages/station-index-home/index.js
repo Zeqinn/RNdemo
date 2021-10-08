@@ -5,14 +5,15 @@ import {
   Image, 
   ScrollView,
   StyleSheet,
-  ImageBackground
+  ImageBackground,
+  TouchableOpacity
  } from 'react-native';
 import Header from '../../components/header';
 import NavigationBar from '../../components/navBar';
 
 export default class Home extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       navTitle: {
         title: '三一砼管家',
@@ -42,18 +43,44 @@ export default class Home extends Component {
       ]
     }
   }
-  renderDataItem(e){
+  onPress = () => {
+    // this.props.navigation.navigate('purchaseContract');
+  }
+  renderDataItem(value,text){
     return (
-      <View>
-        <Text>{e.value}</Text>
-        <Text>{e.text}</Text>
+      <View style={{
+        width: '25%',
+        height: 70,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <Text>{value}</Text>
+        <Text>{text}</Text>
       </View>
     )
   }
-  render() {
-    const {} = this.state
+  renderIconItem(path,text,url){
     return (
-      <View style={{flex: 1, backgroundColor: '#F7F8FA'}}>
+      <TouchableOpacity style={{
+        width: '25%',
+        height: 70,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10
+      }}
+        onPress={this.onPress()}
+      >
+        <Image 
+          source={path}
+          style={{width: 50, height: 50}} 
+        />
+        <Text>{text}</Text>
+      </TouchableOpacity>
+    )
+  }
+  render() {
+    return (
+      <View style={{flex: 1, backgroundColor: '#f0f0f0'}}>
         <NavigationBar
           title={this.state.navTitle}
         />
@@ -80,8 +107,45 @@ export default class Home extends Component {
                   color: '#FFDEDE'
                 }}>累计总生产(方)</Text>
               </ImageBackground>
-              <View>
-                {/* {this.renderDataItem()} */}
+              <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                backgroundColor: '#fff',
+                flexWrap: 'wrap',
+                borderBottomLeftRadius: 10,
+                borderBottomRightRadius: 10
+              }}>
+                {this.renderDataItem('0.00','今日计划')}
+                {this.renderDataItem('0.00','今日生产')}
+                {this.renderDataItem('0.00','今日发货')}
+                {this.renderDataItem('0.00','今日签收')}
+                {this.renderDataItem('0.00','昨日生产')}
+                {this.renderDataItem('0.00','本周生产')}
+                {this.renderDataItem('0.00','本月发货')}
+                {this.renderDataItem('0.00','本月签收')}
+              </View>
+            </View>
+            <View style={styles.bottomContainer}>
+              <Text style={{
+                paddingLeft: 16
+              }}>常用工具</Text>
+              <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+              }}>
+                {this.renderIconItem(require('../../image/customer_mgr.png'), '客户管理')}
+                {this.renderIconItem(require('../../image/constract_mgr.png'), '合同管理')}
+                {this.renderIconItem(require('../../image/order_mgr.png'), '订单管理')}
+                {this.renderIconItem(require('../../image/scheduling_center.png'), '调度中心')}
+                {this.renderIconItem(require('../../image/mix_monitor.png'), '配合比')}
+                {this.renderIconItem(require('../../image/equip_check.png'), '设备巡检')}
+                {this.renderIconItem(require('../../image/quicktest.png'), '快速检测')}
+                {this.renderIconItem(require('../../image/my_focus.png'), '我的关注')}
+                {this.renderIconItem(require('../../image/purchaseContract.png'), '采购合同')}
+                {this.renderIconItem(require('../../image/sign.png'), '打卡签到')}
+                {this.renderIconItem()}
+                {this.renderIconItem()}
               </View>
             </View>
           </View>
@@ -106,5 +170,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  bottomContainer: {
+    marginVertical: 16,
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    paddingVertical: 16
   }
 })

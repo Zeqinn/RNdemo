@@ -39,7 +39,7 @@ class Index extends Component {
           selected={this.state.selectedTab === 'homeTab'}
           onPress={() => {this.onChangeTab('homeTab')}}
         >
-          <Home></Home>
+          <Home navigation={this.props.navigation} ></Home>
         </TabBar.Item>
         <TabBar.Item
           title='审批'
