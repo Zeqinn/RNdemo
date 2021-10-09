@@ -10,56 +10,110 @@ import {
  } from 'react-native';
 import Header from '../../components/header';
 import NavigationBar from '../../components/navBar';
+import request from '../../util/request';
 
 export default class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      navTitle: {
-        title: '三一砼管家',
-        style: {
-          color: '#000000',
-          fontSize: 17,
-          fontWeight: 'bold'
-        }
-      },
-      topData: [
+      dataList: [
         {
-          value: 0.00,
+          value: '0.00',
           text: '今日计划'
         },
         {
-          value: 0.00,
+          value: '0.00',
           text: '今日生产'
         },
         {
-          value: 0.00,
+          value: '0.00',
           text: '今日发货'
         },
         {
-          value: 0.00,
+          value: '0.00',
           text: '今日签收'
-        }
+        },
+        {
+          value: '0.00',
+          text: '昨日生产'
+        },
+        {
+          value: '0.00',
+          text: '本周生产'
+        },
+        {
+          value: '0.00',
+          text: '本月发货'
+        },
+        {
+          value: '0.00',
+          text: '本月签收'
+        },
+      ],
+      iconList: [
+        {
+          path: require('../../image/customer_mgr.png'),
+          text: '客户管理',
+          url: ''
+        },
+        {
+          path: require('../../image/constract_mgr.png'),
+          text: '合同管理',
+          url: ''
+        },
+        {
+          path: require('../../image/order_mgr.png'),
+          text: '订单管理',
+          url: ''
+        },
+        {
+          path: require('../../image/scheduling_center.png'),
+          text: '调度中心',
+          url: ''
+        },
+        {
+          path: require('../../image/mix_monitor.png'),
+          text: '配合比',
+          url: ''
+        },
+        {
+          path: require('../../image/equip_check.png'),
+          text: '设备巡检',
+          url: ''
+        },
+        {
+          path: require('../../image/quicktest.png'),
+          text: '快速检测',
+          url: ''
+        },
+        {
+          path: require('../../image/my_focus.png'),
+          text: '我的关注',
+          url: ''
+        },
+        {
+          path: require('../../image/purchaseContract.png'),
+          text: '采购合同',
+          url: 'purchaseContract'
+        },
+        {
+          path: require('../../image/sign.png'),
+          text: '打卡签到',
+          url: ''
+        },
+        {},
+        {}
       ]
     }
+  } 
+  componentDidMount(){
+    // request.get('/salesCompany/getCustomerList').then(res => {
+    //   console.log('res',res);
+    // }).catch(err => {
+    //   console.log('err', err);
+    // })
   }
-  onPress = () => {
-    // this.props.navigation.navigate('purchaseContract');
-  }
-  renderDataItem(value,text){
-    return (
-      <View style={{
-        width: '25%',
-        height: 70,
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}>
-        <Text>{value}</Text>
-        <Text>{text}</Text>
-      </View>
-    )
-  }
-  renderIconItem(path,text,url){
+  renderIconItem(path,text,url=''){
     return (
       <TouchableOpacity style={{
         width: '25%',
@@ -68,7 +122,9 @@ export default class Home extends Component {
         alignItems: 'center',
         marginTop: 10
       }}
-        onPress={this.onPress()}
+        onPress={() => {
+          this.props.navigation.navigate(url);
+        }}
       >
         <Image 
           source={path}
@@ -81,9 +137,7 @@ export default class Home extends Component {
   render() {
     return (
       <View style={{flex: 1, backgroundColor: '#f0f0f0'}}>
-        <NavigationBar
-          title={this.state.navTitle}
-        />
+        <NavigationBar title={{title: '三一砼管家'}} />
         <ScrollView style={{flex: 1}}>
           <View style={styles.mainContainer}>
             <View style={styles.topContainer}>
@@ -115,14 +169,19 @@ export default class Home extends Component {
                 borderBottomLeftRadius: 10,
                 borderBottomRightRadius: 10
               }}>
-                {this.renderDataItem('0.00','今日计划')}
-                {this.renderDataItem('0.00','今日生产')}
-                {this.renderDataItem('0.00','今日发货')}
-                {this.renderDataItem('0.00','今日签收')}
-                {this.renderDataItem('0.00','昨日生产')}
-                {this.renderDataItem('0.00','本周生产')}
-                {this.renderDataItem('0.00','本月发货')}
-                {this.renderDataItem('0.00','本月签收')}
+                {this.state.dataList.map(i => {
+                  return (
+                    <View style={{
+                      width: '25%',
+                      height: 70,
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}>
+                      <Text>{i.value}</Text>
+                      <Text>{i.text}</Text>
+                    </View>
+                  )
+                })}
               </View>
             </View>
             <View style={styles.bottomContainer}>
@@ -134,18 +193,9 @@ export default class Home extends Component {
                 justifyContent: 'space-between',
                 flexWrap: 'wrap',
               }}>
-                {this.renderIconItem(require('../../image/customer_mgr.png'), '客户管理')}
-                {this.renderIconItem(require('../../image/constract_mgr.png'), '合同管理')}
-                {this.renderIconItem(require('../../image/order_mgr.png'), '订单管理')}
-                {this.renderIconItem(require('../../image/scheduling_center.png'), '调度中心')}
-                {this.renderIconItem(require('../../image/mix_monitor.png'), '配合比')}
-                {this.renderIconItem(require('../../image/equip_check.png'), '设备巡检')}
-                {this.renderIconItem(require('../../image/quicktest.png'), '快速检测')}
-                {this.renderIconItem(require('../../image/my_focus.png'), '我的关注')}
-                {this.renderIconItem(require('../../image/purchaseContract.png'), '采购合同')}
-                {this.renderIconItem(require('../../image/sign.png'), '打卡签到')}
-                {this.renderIconItem()}
-                {this.renderIconItem()}
+                {this.state.iconList.map(i => {
+                  return this.renderIconItem(i.path, i.text, i.url)
+                })}
               </View>
             </View>
           </View>

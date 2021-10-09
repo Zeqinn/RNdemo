@@ -10,6 +10,7 @@ import Home from './pages/station-index-home';
 
 const Stack = createNativeStackNavigator();
 
+
 function Nav() {
   return (
     <NavigationContainer>
@@ -22,5 +23,6 @@ function Nav() {
     </NavigationContainer>
   );
 }
+
 
 export default Nav;
