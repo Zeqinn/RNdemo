@@ -22,6 +22,7 @@ instance.interceptors.request.use(function (config) {
 // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
   // 对响应数据做点什么
+  Toast.remove(key);
   return response;
 }, function (error) {
   // 对响应错误做点什么
@@ -29,7 +30,4 @@ instance.interceptors.response.use(function (response) {
 });
 
 
-export default {
-  get: instance.get,
-  post: instance.post
-}
+export default instance;

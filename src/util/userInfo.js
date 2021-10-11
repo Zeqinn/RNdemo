@@ -1,0 +1,20 @@
+export default {
+  app_role: "station",
+  contacts_name: "小李",
+  contacts_tel: "13510566689",
+  driverId: null,
+  id: "a749a9ec8f7046f28f694672a57ef51c",
+  is_org: 1,
+  org_id: "0341",
+  org_name: "移动站",
+  q_menu: "1,2,3,4,5,6,7,8,9,10",
+  success: true,
+  supplier_id: null,
+  supplier_name: null,
+  true_name: "小李",
+  type: null,
+  user_name: "800103",
+  user_password: null,
+  verify_code: null,
+  verifycode_time: null
+}

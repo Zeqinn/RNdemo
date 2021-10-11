@@ -54,6 +54,15 @@ function getTitleElement(data) {
   if (!data || data.props) {
     return <View style={styles.customTitle}>{data}</View>;
   }
+  if (typeof data === 'string') {
+    return (
+      <View style={styles.navBarTitleContainer}>
+        <Text style={[styles.navBarTitleText]}>
+          {data}
+        </Text>
+      </View>
+    )
+  }
 
   const colorStyle = data.tintColor ? { color: data.tintColor } : null;
 
@@ -85,6 +94,7 @@ export default class NavigationBar extends Component {
       PropTypes.shape(TitleShape),
       PropTypes.element,
       PropTypes.oneOf([null]),
+      PropTypes.string
     ]),
     containerStyle: ViewPropTypes.style
   };
