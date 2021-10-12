@@ -126,9 +126,9 @@ export default class Home extends Component {
   }
   getHomeData(){
     let {dataList} = this.state;
-    rest.getHomeData(userInfo.org_id).then(res => {
-      if (res.data.code == 200) {
-        let list = res.data.data
+    rest.getHomeData({orgId: userInfo.org_id}).then(res => {
+      if (res.code == 200) {
+        let list = res.data;
         dataList[0].value = list.planToDayQuantity.toFixed(2);
         dataList[1].value = list.productToDayQuantity.toFixed(2);
         dataList[2].value = list.deliverToDayQuantity.toFixed(2);
@@ -140,7 +140,7 @@ export default class Home extends Component {
       }
       this.setState({
         dataList,
-        sum: res.data.data.productTotalQuantity.toFixed(2)
+        sum: res.data.productTotalQuantity.toFixed(2)
       })
     })
   }

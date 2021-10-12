@@ -18,7 +18,7 @@ function Nav() {
         initialRouteName="Index"
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#f0f0f0'
+            backgroundColor: '#fff'
           },
           headerTintColor: '#000',
           headerTitleStyle: {
