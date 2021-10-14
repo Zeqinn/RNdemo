@@ -3,7 +3,24 @@ import {View, Text, Image, TextInput, TouchableOpacity} from 'react-native';
 
 
 export default class SearchBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: '',
+      timer: -1
+    }
+  }
+  onChangeText(text) {
+    this.setState({
+      inputValue: text
+    })
+    clearTimeout(this.state.timer);
+    this.state.timer = setTimeout(() => {
+      this.props.input(this.state.inputValue);
+    }, 1000);
+  }
   render() {
+    let {inputValue} = this.state;
     return (
       <View style={{
         flexDirection: 'row',
@@ -26,6 +43,9 @@ export default class SearchBar extends Component {
         <TextInput
           placeholder='请输入合同编号'
           style={{flex: 1, fontSize: 16}}
+          value={inputValue}
+          onChangeText={text => this.onChangeText(text)}
+          clearButtonMode='while-editing'
         />
         <TouchableOpacity
           style={{

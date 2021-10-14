@@ -11,8 +11,8 @@ const getHomeData = (param) => {
   return request.getRequest('/orgHome/operatingData', param)
 }
 
-const purchaseContractList = () => {
-  return request.getRequest('/purchaseContract/purchaseContractList',{},true)
+const purchaseContractList = (param) => {
+  return request.getRequest('/purchaseContract/purchaseContractList',param,true)
 }
 
 

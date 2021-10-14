@@ -4,6 +4,7 @@ import {
   Text, 
   FlatList,
   TouchableOpacity,
+  RefreshControl,
   StyleSheet
 } from 'react-native';
 import SearchBar from '../../components/searchBar';
@@ -13,18 +14,29 @@ export default class purchaseContract extends Component {
   constructor(props){
     super(props);
     this.state = {
-      contractList: []
+      contractList: [],
+      test: false,
+      inputValue: ''
     }
   }
   componentDidMount(){
+    this.getContractList();
+  }
+  getContractList(){
     const param = {
-
+      purchaseContractCode: this.state.inputValue
     }
-    rest.purchaseContractList().then(res => {
+    rest.purchaseContractList(param).then(res => {
       this.setState({
-        contractList: res.data
+        contractList: res.data,
       })
     })
+  }
+  getInputValue(val) {
+    this.setState({
+      inputValue: val
+    })
+    this.getContractList();
   }
   renderItem({item}){
     return (
@@ -78,7 +90,12 @@ export default class purchaseContract extends Component {
         </View>
         <View style={styles.divider}></View>
         <View style={styles.btnRow}>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity 
+            style={styles.btn}
+            onPress={() => {
+              this.props.navigation.navigate('purchaseContractSet');
+            }}
+          >
             <Text style={{textAlign: 'center', lineHeight: 30}}>设定单价</Text>
           </TouchableOpacity>
         </View>
@@ -90,10 +107,11 @@ export default class purchaseContract extends Component {
     let {contractList} = this.state;
     return (
       <View style={{flex: 1, backgroundColor: '#f0f0f0'}}>
-        <SearchBar />
+        <SearchBar input={this.getInputValue.bind(this)} />
         <FlatList
           data={contractList}
-          renderItem={this.renderItem}
+          initialNumToRender='10'
+          renderItem={this.renderItem.bind(this)}
           keyExtractor={item => item.id}
         />
       </View>

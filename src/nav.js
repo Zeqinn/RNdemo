@@ -7,6 +7,7 @@ import Login from './pages/login';
 import Index from './pages/station-index';
 import purchaseContract from './pages/station-purchase-contract';
 import Home from './pages/station-index-home';
+import purchaseContractSet from './pages/station-purchase-contract-set';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +16,7 @@ function Nav() {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-        initialRouteName="Index"
+        initialRouteName="purchaseContractSet"
         screenOptions={{
           headerStyle: {
             backgroundColor: '#fff'
@@ -42,6 +43,7 @@ function Nav() {
         />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="purchaseContract" component={purchaseContract} options={{ title: '采购合同管理' }} />
+        <Stack.Screen name="purchaseContractSet" component={purchaseContractSet} options={{ title: '设定单价' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

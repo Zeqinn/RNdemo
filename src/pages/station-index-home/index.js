@@ -9,7 +9,6 @@ import {
   TouchableOpacity
  } from 'react-native';
 import Header from '../../components/header';
-// import NavigationBar from '../../components/navBar';
 import userInfo from '../../util/userInfo';
 import rest from '../../util/rest';
 import util from '../../util/util';
@@ -176,7 +175,6 @@ export default class Home extends Component {
     let {sum, dataList, iconList, date} = this.state;
     return (
       <View style={{flex: 1, backgroundColor: '#f0f0f0'}}>
-        {/* <NavigationBar title='三一砼管家'/> */}
         <ScrollView style={{flex: 1}}>
           <View style={styles.mainContainer}>
             <View style={styles.topContainer}>
